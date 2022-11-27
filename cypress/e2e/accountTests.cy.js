@@ -21,7 +21,7 @@ describe('Creating account tests', () => {
     cy.visit('https://magento.softwaretestingboard.com')
   })
 
-  it.skip('1.Create New Account', () => {
+  it('1.Create New Account', () => {
 
     //Click create account button
     homePage.click_CreateAccButton()
