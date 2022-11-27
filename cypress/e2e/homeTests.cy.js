@@ -9,7 +9,7 @@ describe('Home Page Tests', () => {
     cy.visit('https://magento.softwaretestingboard.com')
   })
 
-  it.skip('1.Verify Header ', () => {
+  it('1.Verify Header ', () => {
     // Check the correct url
     cy.url().should('include', 'https://magento.softwaretestingboard.com')
   })
