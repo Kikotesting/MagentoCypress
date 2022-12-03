@@ -7,14 +7,10 @@ import {CREATE_ACCOUNT_HEADER_TEXT,
  from "../support/constant.js";
 
 import { beforeEach } from "mocha";
-import { HomePage } from "../pages/homePage.js";
-import { AccountPage } from "../pages/accountPage.js";
-import { AssertBase } from "../assertion/assertBase.js";
+import { CustomerAccount } from "../pages/customerAccount.js";
 
 describe('Creating account tests', () => {
-  const homePage = new (HomePage);
-  const accountPage = new (AccountPage);
-  const assertBase = new (AssertBase);
+  const customerAccount = new (CustomerAccount);
   
   beforeEach(() => {
     //Open the website under testing
@@ -24,19 +20,21 @@ describe('Creating account tests', () => {
   it('1.Create New Account', () => {
 
     //Click create account button
-    homePage.click_CreateAccButton()
+    cy.clickCreateAccountBtn()
     // Check the URL of the Account page
     cy.url().should('include', 'https://magento.softwaretestingboard.com/customer/account/create/')
     // Check the Header of the Account page
     cy.contains(CREATE_ACCOUNT_HEADER_TEXT).and('be.visible')
+
     // Populating all fields for registration
-    accountPage.fillRegistationForm()
+    customerAccount.fillRegistationForm()
+    
     // Check the welcome message for registered user
-    cy.contains(MESSAGE_SUCCESSFULL_REGISTERED).and('be.visible')
+    cy.contains(MESSAGE_SUCCESSFULL_REGISTERED).should('have.text',MESSAGE_SUCCESSFULL_REGISTERED).and('be.visible')
     // Check the My Account section for new registration Name and Address
-    cy.contains(fakeFirstName).and('be.visible')
-    cy.contains(fakeLastName).and('be.visible')
-    cy.contains(fakeEmailAddress).and('be.visible')
+    cy.contains(fakeFirstName).should('have.text',fakeFirstName).and('be.visible')
+    cy.contains(fakeLastName).should('have.text',fakeLastName).and('be.visible')
+    cy.contains(fakeEmailAddress).should('have.text',fakeEmailAddress).and('be.visible')
   });
 
 })

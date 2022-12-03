@@ -59,5 +59,9 @@ describe('Login Tests', () => {
       cy.contains(SIGN_OUT_PARAGRAPH_TEXT)
         .should('have.text',SIGN_OUT_PARAGRAPH_TEXT)
         .and('be.visible')
-  })
+    })
+    
+
+
+
 });

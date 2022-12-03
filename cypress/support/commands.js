@@ -23,11 +23,18 @@ Cypress.Commands.add('click_CustomerMenu_SignOut',()=>{
 })
 
 /**
- * SignIn page commands
+ * Home page commands
 */
 Cypress.Commands.add('clickSignInBtn', () => {
     cy.contains('li', 'Sign In').click()
   })
+Cypress.Commands.add('clickCreateAccountBtn', () => {
+    cy.contains('li', 'Create an Account')
+})
+
+/**
+ * SignIn page commands
+*/
 Cypress.Commands.add('typeEmailAndPassword', () => {
     cy.get('#email').type('bebo@mail.bg')
     cy.get('#pass').type('Kiko123@')
@@ -35,6 +42,9 @@ Cypress.Commands.add('typeEmailAndPassword', () => {
 Cypress.Commands.add('clickSubmitBtn',()=>{
     cy.get('#send2').click()
 })
+
+
+
 
 
 

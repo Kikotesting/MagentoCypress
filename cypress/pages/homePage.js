@@ -4,8 +4,6 @@ export class HomePage {
     elements = {
 
         // Buttons
-        signInBtn : () => cy.contains('li', 'Sign In'),
-        createAccBtn : () => cy.contains('li', 'Create an Account'),
         showCartIconBtn : () => cy.get('.showcart'),
         subscribeBtn : () => cy.xpath('//button/span[contains(text(),"Subscribe")]'),
 
@@ -29,9 +27,6 @@ export class HomePage {
     /** 
      * METHODS buttons
     */
-    click_SignInButton(){
-        this.elements.signInBtn().click()
-    }
     click_CreateAccButton(){
         this.elements.createAccBtn().click()
     }

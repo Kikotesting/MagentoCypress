@@ -2,10 +2,9 @@
 import {fakeFirstName, fakeLastName, fakePassword, fakeEmailAddress,
 } from "../support/constant.js";
 
-export class AccountPage {
+export class CustomerAccount {
 
-
-    elements = {
+    #elements = {
         //Personal Information
         firstName  : () => cy.get('#firstname'),
         lastName : () => cy.get('#lastname'),
@@ -16,13 +15,23 @@ export class AccountPage {
         accPasswordConfirm : () => cy.get('#password-confirmation'),
         createAccButton : () => cy.xpath('//button/span[contains(text(),"Create an Account")]'),
     }
+    
+    fillRegistationForm(){
+        var type_firstName = function(){
+            firstName().type(fakeFirstName)
+        }
+        this.type_lastName()
+        this.type_emailAddress()
+        this.type_accPassword()
+        this.type_accPasswordConfirm()
+        this.click_createAccButton()
+
+    }
 
     /**
      * METHODS fill the registration form
      */
-    type_firstName(){
-        this.elements.firstName().type(fakeFirstName)
-    }
+
     type_lastName(){
         this.elements.lastName().type(fakeLastName)
     }
@@ -40,17 +49,5 @@ export class AccountPage {
     click_createAccButton(){
         this.elements.createAccButton().click()
     }
-
-    fillRegistationForm(){
-        this.type_firstName()
-        this.type_lastName()
-        this.type_emailAddress()
-        this.type_accPassword()
-        this.type_accPasswordConfirm()
-        this.click_createAccButton()
-    }
-
-
-    
 
 }
