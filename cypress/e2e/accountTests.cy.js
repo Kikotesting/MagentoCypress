@@ -32,9 +32,7 @@ describe('Creating account tests', () => {
     // Populating all fields for registration
     accountPage.fillRegistationForm()
     // Check the welcome message for registered user
-    assertBase.elments.registeredCustomerMessage()
-      .should($el => expect($el.text()
-      .trim()).to.equal(MESSAGE_SUCCESSFULL_REGISTERED))
+    cy.contains(MESSAGE_SUCCESSFULL_REGISTERED).and('be.visible')
     // Check the My Account section for new registration Name and Address
     cy.contains(fakeFirstName).and('be.visible')
     cy.contains(fakeLastName).and('be.visible')

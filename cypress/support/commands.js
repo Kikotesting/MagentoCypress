@@ -3,15 +3,25 @@
 // ***********************************************
 /**
  * General commands
+ * HeaderMenuDropdown (3-options)
 */
-Cypress.Commands.add('clickCustomerMenuDropdown',()=>{
-    cy.wait(4000)
+Cypress.Commands.add('click_CustomerMenu',()=>{
+    cy.wait(3000)
     cy.xpath('//div[2]/header/div[1]/div/ul/li[2]/span/button').click()
 })
-Cypress.Commands.add('clickMyAccountOption',()=>{
+Cypress.Commands.add('click_CustomerMenu_MyAccount',()=>{
     cy.wait(1000)
     cy.contains('My Account').click()
 })
+Cypress.Commands.add('click_CustomerMenu_MyWishList',()=>{
+    cy.wait(1000)
+    cy.contains('My Wish List').click()
+})
+Cypress.Commands.add('click_CustomerMenu_SignOut',()=>{
+    cy.wait(1000)
+    cy.contains('Sign Out').click()
+})
+
 /**
  * SignIn page commands
 */
