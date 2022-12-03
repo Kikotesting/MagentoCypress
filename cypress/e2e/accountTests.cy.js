@@ -7,10 +7,10 @@ import {CREATE_ACCOUNT_HEADER_TEXT,
  from "../support/constant.js";
 
 import { beforeEach } from "mocha";
-import { CustomerAccount } from "../pages/customerAccount.js";
+import { AccountBase } from "../pages/accountBase.js";
 
 describe('Creating account tests', () => {
-  const customerAccount = new (CustomerAccount);
+  const accountBase = new (AccountBase);
   
   beforeEach(() => {
     //Open the website under testing
@@ -27,7 +27,7 @@ describe('Creating account tests', () => {
     cy.contains(CREATE_ACCOUNT_HEADER_TEXT).and('be.visible')
 
     // Populating all fields for registration
-    customerAccount.fillRegistationForm()
+    accountBase.fillRegistationForm()
     
     // Check the welcome message for registered user
     cy.contains(MESSAGE_SUCCESSFULL_REGISTERED).should('have.text',MESSAGE_SUCCESSFULL_REGISTERED).and('be.visible')
