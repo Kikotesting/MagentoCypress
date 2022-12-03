@@ -14,7 +14,7 @@ describe('Login Tests', () => {
       cy.visit('https://magento.softwaretestingboard.com')
     })
   
-    it('1.LogIn with valid username and password and verify the information for account', () => {
+    it('1.LogIn with valid username and password and verifies the information for account', () => {
         //Click SignIn account button
         cy.clickSignInBtn()
         // Check the URL of the SignIn page
