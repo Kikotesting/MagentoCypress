@@ -13,9 +13,16 @@ export let fakePassword = faker.datatype.string(10);
 
 
 
+/**
+ * SignIn/SignOut Messages
+ * ===========================================
+ */
+ export let SIGN_OUT_HEADER_TEXT = 'You are signed out';
+ export let SIGN_OUT_PARAGRAPH_TEXT = 'You have signed out and will go to our homepage in 5 seconds.';
+
 
 /**
- * Create Account Page
+ * Create Account Messages
  * ===========================================
  */
  export let CREATE_ACCOUNT_HEADER_TEXT = 'Create New Customer Account';
