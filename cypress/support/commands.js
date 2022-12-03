@@ -29,7 +29,7 @@ Cypress.Commands.add('clickSignInBtn', () => {
     cy.contains('li', 'Sign In').click()
   })
 Cypress.Commands.add('clickCreateAccountBtn', () => {
-    cy.contains('li', 'Create an Account')
+    cy.contains('li', 'Create an Account').click()
 })
 
 /**

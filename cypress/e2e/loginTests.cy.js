@@ -30,6 +30,7 @@ describe('Login Tests', () => {
         cy.click_CustomerMenu_MyAccount()
         // Check the Information for the login user
         cy.url().should('include', 'https://magento.softwaretestingboard.com/customer/account/')
+        cy.contains('Welcome, Bebo Bebov!').and('be.visible')
         cy.get('.base').should('have.text','My Account').and('be.visible')
         cy.xpath('//*[@id="maincontent"]/div[2]/div[1]/div[3]/div[2]/div[1]/strong/span').should('have.text','Contact Information').and('be.visible')
         cy.contains('Bebo Bebov').and('be.visible')

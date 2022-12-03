@@ -27,9 +27,6 @@ export class HomePage {
     /** 
      * METHODS buttons
     */
-    click_CreateAccButton(){
-        this.elements.createAccBtn().click()
-    }
     click_showCartButton(){
         this.elements.showCartIconBtn().click()
     }

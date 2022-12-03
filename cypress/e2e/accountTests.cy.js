@@ -30,11 +30,16 @@ describe('Creating account tests', () => {
     accountBase.fillRegistationForm()
     
     // Check the welcome message for registered user
-    cy.contains(MESSAGE_SUCCESSFULL_REGISTERED).should('have.text',MESSAGE_SUCCESSFULL_REGISTERED).and('be.visible')
+    cy.contains(MESSAGE_SUCCESSFULL_REGISTERED).should('have.text',MESSAGE_SUCCESSFULL_REGISTERED)
+    .and('be.visible')
+    // Check the Information for the login user
+    cy.get('.base').should('have.text','My Account').and('be.visible')
+    cy.contains('Welcome,' + " " + fakeFirstName + " " + fakeLastName + '!').and('be.visible')
     // Check the My Account section for new registration Name and Address
-    cy.contains(fakeFirstName).should('have.text',fakeFirstName).and('be.visible')
-    cy.contains(fakeLastName).should('have.text',fakeLastName).and('be.visible')
-    cy.contains(fakeEmailAddress).should('have.text',fakeEmailAddress).and('be.visible')
+    cy.xpath('//*[@id="maincontent"]/div[2]/div[1]/div[3]/div[2]/div[1]/strong/span').should('have.text','Contact Information').and('be.visible')
+    cy.contains(fakeFirstName + " " + fakeLastName).and('be.visible')
+    cy.contains(fakeEmailAddress).and('be.visible')
+
   });
 
 })

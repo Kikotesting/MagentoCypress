@@ -15,38 +15,39 @@ export class AccountBase {
         accPasswordConfirm : () => cy.get('#password-confirmation'),
         createAccButton : () => cy.xpath('//button/span[contains(text(),"Create an Account")]'),
     }
-    
-    fillRegistationForm(){
-        this.type_firstName()
-        this.type_lastName()
-        this.type_emailAddress()
-        this.type_accPassword()
-        this.type_accPasswordConfirm()
-        this.click_createAccButton()
-    }
-
-    /**
+        /**
      * METHODS fill the registration form
      */
-    #type_firstName(){
-        this.elements.firstName().type(fakeFirstName)
+        type_firstName(){
+            this.elements.firstName().type(fakeFirstName)
+        }
+        type_lastName(){
+            this.elements.lastName().type(fakeLastName)
+        }
+        type_emailAddress(){
+            this.elements.emailAddress().type(fakeEmailAddress)
+            cy.log(fakeEmailAddress)
+        }
+        type_accPassword(){
+            this.elements.accPassword().type(fakePassword)
+            cy.log(fakePassword)
+        }
+        type_accPasswordConfirm(){
+            this.elements.accPasswordConfirm().type(fakePassword)
+        }
+        click_createAccButton(){
+            this.elements.createAccButton().click()
+        }
+    
+    fillRegistationForm(){
+       this.type_firstName()
+       this.type_lastName()
+       this.type_emailAddress()
+       this.type_accPassword()
+       this.type_accPasswordConfirm()
+       this.click_createAccButton()
     }
-    #type_lastName(){
-        this.elements.lastName().type(fakeLastName)
-    }
-    #type_emailAddress(){
-        this.elements.emailAddress().type(fakeEmailAddress)
-        cy.log(fakeEmailAddress)
-    }
-    #type_accPassword(){
-        this.elements.accPassword().type(fakePassword)
-        cy.log(fakePassword)
-    }
-    #type_accPasswordConfirm(){
-        this.elements.accPasswordConfirm().type(fakePassword)
-    }
-    #click_createAccButton(){
-        this.elements.createAccButton().click()
-    }
+
+
 
 }
