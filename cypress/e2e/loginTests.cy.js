@@ -9,6 +9,7 @@ import {SIGN_OUT_HEADER_TEXT,
 
 import { beforeEach } from "mocha";
 import { Locators } from "../support/locators.js";
+import { should } from "chai";
 const locators = new (Locators);
 
 describe('Login/Logout Positive Tests', () => {
@@ -20,35 +21,38 @@ describe('Login/Logout Positive Tests', () => {
   
     it('1.Login with valid Email and Pass', () => {
         //Click SignIn account button
-        cy.clickSignInBtn()
+        cy.click_SignInBtn()
         // Check the URL of the SignIn page
         cy.url().should('include', SIGN_IN_URL_TEXT)
         // Check the Header of the SignIn page
         cy.contains('Customer Login').and('be.visible')
         // Populates the SignIn form and submit
-        cy.signIn_validCredentials()
+        cy.fill_SignInForm()
+        // Check header panel
+        cy.contains('Welcome, Bebo Bebov!').and('be.visible')
         // Go to Dropdown-header Menu and choose option My Account
         cy.click_CustomerMenu_MyAccount()
-        // Check the Information for the login user
+        // Check URL for SignIn page
         cy.url().should('include', SIGN_IN_LOGIN_USER_TEXT)
-        cy.contains('Welcome, Bebo Bebov!').and('be.visible')
+        // Check the section for Logged customer
         cy.get('.base').should('have.text','My Account').and('be.visible')
         // Check the header in the box section
-        locators.ele_General.box_ContactInfo()
-          .should('have.text','Contact Information')
-          .and('be.visible')
-        cy.contains('Bebo Bebov').and('be.visible')
-        cy.contains('bebo@mail.bg').and('be.visible')
+        locators.ele_AccountPage.box_Title()
+          .should('have.text','Contact Information').and('be.visible')
+        locators.ele_AccountPage.box_Content()
+          .should('have.text','Bebo Bebov').and('be.visible')
+        locators.ele_AccountPage.box_Content()
+        .should('have.text','bebo@mail.bg').and('be.visible')
     })
     it('2.Login with valid Email and Pass then Logout', () => {
       //Click SignIn account button
-      cy.clickSignInBtn()
+      cy.click_SignInBtn()
       // Check the URL of the SignIn page
       cy.url().should('include', SIGN_IN_URL_TEXT)
       // Check the Header of the SignIn page
       cy.contains('Customer Login').and('be.visible')
       // Populates the SignIn form and submit
-      cy.signIn_validCredentials()
+      cy.fill_SignInForm()
       // Navigate to dropdownCustomer menu and click SignOut
       cy.click_SignOut()
       //Check the url for Sign Out
@@ -60,9 +64,10 @@ describe('Login/Logout Positive Tests', () => {
       cy.contains(SIGN_OUT_PARAGRAPH_TEXT)
         .should('have.text',SIGN_OUT_PARAGRAPH_TEXT)
         .and('be.visible')
+      // Wait 5 seconds message to disappear and check again
+      cy.wait(5000)
+      cy.contains(SIGN_OUT_PARAGRAPH_TEXT).should('not.exist')
     })
     
-
-
 
 });

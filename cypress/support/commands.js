@@ -2,12 +2,18 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
+import { MESSAGE_SUCCESSFULL_REGISTERED } from "../support/constant.js";
+
 import { Locators } from "../support/locators.js";
 const locators = new (Locators);
 
 /*************************************************
  * GENERAL website commands
 ************************************************/
+    Cypress.Commands.add('login_Default', () => {
+        cy.click_SignInBtn()
+        cy.signIn_validCredentials()
+    })
     Cypress.Commands.add('click_SignInBtn', () => {
         locators.ele_General.signInBtn().click()
     })
@@ -28,25 +34,42 @@ const locators = new (Locators);
     })
     Cypress.Commands.add('click_SignOut',()=>{
         cy.wait(3000)
-        locators.ele_General.dropdown_CustomerMenu.click()
+        locators.ele_General.dropdown_CustomerMenu().click()
         cy.wait(1000)
         cy.contains('Sign Out').click()
     })
 
 /**
- * SignIn page commands
+ * SignIn page behavior
 */
-    Cypress.Commands.add('signIn_validCredentials', () => {
+    Cypress.Commands.add('fill_SignInF', () => {
         cy.typeEmailAndPassword()
-        cy.clickSubmitBtn()
+        cy.click_SubmitBtn()
     })
     Cypress.Commands.add('typeEmailAndPassword', () => {
         locators.ele_SignInPage.emailField().type('bebo@mail.bg')
         locators.ele_SignInPage.passwordField().type('Kiko123@')
     })
-    Cypress.Commands.add('clickSubmitBtn',()=>{
+    Cypress.Commands.add('click_SubmitBtn',()=>{
         locators.ele_SignInPage.submitButton().click()
     })
+
+/**
+ * Account page behavior
+*/
+    Cypress.Commands.add('validate_SuccessMessageAndBoxSection',()=>{
+    // Check the welcome message for registered user
+        cy.contains(MESSAGE_SUCCESSFULL_REGISTERED)
+        .should('have.text',MESSAGE_SUCCESSFULL_REGISTERED)
+        .and('be.visible')
+    // Check headers texts for customer account
+        locators.ele_AccountPage.headerAccountText()
+            .should('have.text','My Account').and('be.visible')
+        locators.ele_AccountPage.box_Title()
+            .should('have.text','Contact Information').and('be.visible')
+    })
+
+
 
 
 

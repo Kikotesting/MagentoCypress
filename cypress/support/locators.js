@@ -16,18 +16,21 @@ export class Locators {
         newsLetterField : () => cy.get('#newsletter'),
 
         // Buttons
-        signInBtn : () => cy.xpath('//div[2]/header/div[1]/div/ul/li[2]/a'),
-        createAccBtn : () => cy.get('//div[2]/header/div[1]/div/ul/li[3]/a'),
+        signInBtn : () => cy.xpath('/html/body/div[2]/header/div[1]/div/ul/li[2]/a'),
+        createAccBtn : () => cy.xpath('/html/body/div[2]/header/div[1]/div/ul/li[3]/a'),
         showCartIconBtn : () => cy.get('.showcart'),
         footer_SubscribeBtn : () => cy.xpath('//button/span[contains(text(),"Subscribe")]'),
-
-        //Box sections
-        box_ContactInfo : () => cy.xpath('//*[@id="maincontent"]/div[2]/div[1]/div[3]/div[2]/div[1]/strong/span'),
     }
     
     ele_SignInPage = {
         emailField : () => cy.get('#email'),
         passwordField : () => cy.get('#pass'),
         submitButton : () =>cy.get('#send2'),
+    }
+    ele_AccountPage = {
+        headerAccountText : () => cy.get('.base'),
+        //Box sections
+        box_Title : () => cy.xpath('//*[@class="box-title"]/span[contains(text(),"Contact Information")]'),
+        box_Content : () => cy.xpath('//*[@id="maincontent"]/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/p'),
     }
 }

@@ -8,10 +8,13 @@ import {CREATE_ACCOUNT_HEADER_TEXT,
  from "../support/constant.js";
 
 import { beforeEach } from "mocha";
+
 import { AccountBase } from "../utilities/accountBase.js";
+const accountBase = new (AccountBase);
+import { Locators } from "../support/locators.js";
+const locators = new (Locators);
 
 describe('Creating Account Positive Tests', () => {
-  const accountBase = new (AccountBase);
   
   beforeEach(() => {
     //Open the website under testing
@@ -20,24 +23,32 @@ describe('Creating Account Positive Tests', () => {
 
   it('1.Create New Account', () => {
     //Click create account button
-    cy.clickCreateAccountBtn()
+    cy.click_CreateAccountBtn()
     // Check the URL of the Account page
     cy.url().should('include', ACCOUNT_URL_TEXT)
     // Check the Header of the Account page
     cy.contains(CREATE_ACCOUNT_HEADER_TEXT).and('be.visible')
     // Populating all fields for registration
     accountBase.fillRegistationForm()
-    // Check the welcome message for registered user
-    cy.contains(MESSAGE_SUCCESSFULL_REGISTERED)
-      .should('have.text',MESSAGE_SUCCESSFULL_REGISTERED)
-      .and('be.visible')
-    // Check the Information for the login user
-    cy.get('.base').should('have.text','My Account').and('be.visible')
+    // Check welcome messages and box section headers
+    cy.validate_SuccessMessageAndBoxSection()
+    // Check box content for customer name and email
+    locators.ele_AccountPage.box_Content()
+        .should('have.text',"\n"+fakeFirstName +" "+ fakeLastName+"\n"+fakeEmailAddress+"\n")
+        .and('be.visible')
+    // Check the Information for the created user on panel header
     cy.contains('Welcome,' + " " + fakeFirstName + " " + fakeLastName + '!').and('be.visible')
-    // Check the My Account section for new registration Name and Address
-    loca.should('have.text','Contact Information').and('be.visible')
-    cy.contains(fakeFirstName + " " + fakeLastName).and('be.visible')
-    cy.contains(fakeEmailAddress).and('be.visible')
+  });
+
+  it.skip('1.Edit Created Account', () => {
+    //Click create account button
+    cy.click_CreateAccountBtn()
+    // Populating all fields for registration
+    accountBase.fillRegistationForm()
+    // Check the welcome message for registered user
+     // to doo....
+    // ==============================================================
+
   });
 
 
