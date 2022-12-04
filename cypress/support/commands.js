@@ -21,22 +21,16 @@ const locators = new (Locators);
         locators.ele_General.createAccBtn().click()
     })
     Cypress.Commands.add('click_CustomerMenu_MyAccount',()=>{
-        cy.wait(3000)
-        locators.ele_General.dropdown_CustomerMenu().click()
-        cy.wait(1000)
-        cy.contains('My Account').click()
+        locators.ele_General.dropdown_CustomerMenu({ timeout: 3000 }).click()
+        cy.contains('My Account',{ timeout: 1000 }).click()
     })
     Cypress.Commands.add('click_CustomerMenu_MyWishList',()=>{
-        cy.wait(3000)
-        locators.ele_General.dropdown_CustomerMenu().click()
-        cy.wait(1000)
-        cy.contains('My Wish List').click()
+        locators.ele_General.dropdown_CustomerMenu({ timeout: 3000 }).click()
+        cy.contains('My Wish List',{ timeout: 1000 }).click()
     })
     Cypress.Commands.add('click_SignOut',()=>{
-        cy.wait(3000)
-        locators.ele_General.dropdown_CustomerMenu().click()
-        cy.wait(1000)
-        cy.contains('Sign Out').click()
+        locators.ele_General.dropdown_CustomerMenu({ timeout: 3000 }).click()
+        cy.contains('Sign Out',{ timeout: 1000 }).click()
     })
 
 /**
