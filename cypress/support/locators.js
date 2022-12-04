@@ -25,14 +25,25 @@ export class Locators {
     ele_SignInPage = {
         emailField : () => cy.get('#email'),
         passwordField : () => cy.get('#pass'),
+        
         submitButton : () =>cy.get('#send2'),
     }
     ele_AccountPage = {
+        //Messages
+        messageSavingAccountInfo : () => cy.xpath('//*[@id="maincontent"]/div[2]/div[2]/div/div/div'),
+        //Headers
         headerAccountText : () => cy.get('.base'),
         editAccountHeaderText : () => cy.get('[data-ui-id="page-title-wrapper"]'),
-        //Fields
+        //Edit Account Fields
         firstNameField : () => cy.get('#firstname'),
         lastNameField : () => cy.get('#lastname'),
+        changeEmailField: () => cy.get('[data-input="change-email"]'),
+        changePasswordField : () => cy.get('[data-input="current-password"]'),
+
+        //Checkbox
+        markEmailBox : () => cy.get('#change-email'),
+        markPasswordBox : () => cy.get('#change-password'),
+
         //Buttons
         editButton : () => cy.get('.box-information > .box-actions > .edit > span'),
         saveButton : () => cy.get('#form-validate > .actions-toolbar > div.primary > .action > span'),

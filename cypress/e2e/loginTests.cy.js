@@ -28,7 +28,7 @@ describe('Login/Logout Positive Tests', () => {
         // Populates the SignIn form and submit
         cy.fill_SignInForm()
         // Check header panel
-        cy.contains('Welcome, Bebo Bebov!').and('be.visible')
+        cy.contains('Welcome, kikcho kikchov!').and('be.visible')
         // Go to Dropdown-header Menu and choose option My Account
         cy.click_CustomerMenu_MyAccount()
         // Check URL for SignIn page
@@ -40,7 +40,7 @@ describe('Login/Logout Positive Tests', () => {
           .should('have.text','Contact Information').and('be.visible')
         // Check box content for customer name and email
         locators.ele_AccountPage.box_Content()
-          .should('have.text',"\n"+'Bebo'+" "+'Bebov'+"\n"+'bebo@mail.bg'+"\n")
+          .should('have.text',"\n"+'kikcho'+" "+'kikchov'+"\n"+'kiko1@mail.bg'+"\n")
     })
     it('2.Login with valid Email and Pass then Logout', () => {
       //Click SignIn account button

@@ -17,6 +17,7 @@ export let fakePassword = faker.datatype.string(10);
  */
  export let SIGN_IN_URL_TEXT = 'https://magento.softwaretestingboard.com/customer/account/login/referer/';
  export let SIGN_IN_LOGIN_USER_TEXT = 'https://magento.softwaretestingboard.com/customer/account/';
+ 
 
  export let SIGN_OUT_HEADER_TEXT = 'You are signed out';
  export let SIGN_OUT_PARAGRAPH_TEXT = 'You have signed out and will go to our homepage in 5 seconds.';
@@ -31,4 +32,5 @@ export let fakePassword = faker.datatype.string(10);
  export let CREATE_ACCOUNT_HEADER_TEXT = 'Create New Customer Account';
  export let EDIT_ACCOUNT_HEADER_TEXT = 'Edit Account Information';
  export let MESSAGE_SUCCESSFULL_REGISTERED = 'Thank you for registering with Fake Online Clothing Store.';
+ export let MESSAGE_SAVED_ACCOUNT_INFORMATION = 'You saved the account information.';
  

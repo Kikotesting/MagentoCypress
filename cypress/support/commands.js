@@ -12,7 +12,7 @@ const locators = new (Locators);
 ************************************************/
     Cypress.Commands.add('login_Default', () => {
         cy.click_SignInBtn()
-        cy.signIn_validCredentials()
+        cy.fill_SignInFormAndSubmit()
     })
     Cypress.Commands.add('click_SignInBtn', () => {
         locators.ele_General.signInBtn().click()
@@ -42,12 +42,16 @@ const locators = new (Locators);
 /**
  * SignIn page behavior
 */
-    Cypress.Commands.add('fill_SignInForm', () => {
-        cy.typeEmailAndPassword()
+    Cypress.Commands.add('fill_SignInFormAndSubmit', () => {
+        cy.type_EmailAndPassword()
         cy.click_SubmitBtn()
     })
-    Cypress.Commands.add('typeEmailAndPassword', () => {
-        locators.ele_SignInPage.emailField().type('bebo@mail.bg')
+    Cypress.Commands.add('type_EmailAndPassword', () => {
+        locators.ele_SignInPage.emailField().type('kiko1@mail.bg')
+        locators.ele_SignInPage.passwordField().type('Kiko123@')
+    })
+    Cypress.Commands.add('typeEdited_EmailAndPassword', () => {
+        locators.ele_SignInPage.emailField().type('kikoTesting@mail.bg')
         locators.ele_SignInPage.passwordField().type('Kiko123@')
     })
     Cypress.Commands.add('click_SubmitBtn',()=>{
@@ -69,9 +73,25 @@ const locators = new (Locators);
             .should('have.text','Contact Information').and('be.visible')
     })
     Cypress.Commands.add('edit_FullNameAndSave',()=>{
-        // Change firstname and lastname 
+        // Change Firstname and Lastname 
         locators.ele_AccountPage.firstNameField().clear().type("new1")
         locators.ele_AccountPage.lastNameField().clear().type("new2")
+        // Click 'Save' button 
+        locators.ele_AccountPage.saveButton().click()
+    })
+    Cypress.Commands.add('edit_EmailAndSave',()=>{
+        // Change Email on user 
+        locators.ele_AccountPage.markEmailBox().click()
+        locators.ele_AccountPage.changeEmailField().clear().type("kikoTesting@mail.bg")
+        locators.ele_AccountPage.changePasswordField().clear().type('Kiko123@')
+        // Click 'Save' button 
+        locators.ele_AccountPage.saveButton().click()
+    })
+    Cypress.Commands.add('revert_OldEmailAndSave',()=>{
+        // Change Email on user 
+        locators.ele_AccountPage.markEmailBox().click()
+        locators.ele_AccountPage.changeEmailField().clear().type("kiko1@mail.bg")
+        locators.ele_AccountPage.changePasswordField().clear().type('Kiko123@')
         // Click 'Save' button 
         locators.ele_AccountPage.saveButton().click()
     })
