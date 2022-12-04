@@ -1,11 +1,10 @@
 /// <reference types="cypress" />
 
-import {CREATE_ACCOUNT_HEADER_TEXT,
-        ACCOUNT_URL_TEXT, 
-        MESSAGE_SUCCESSFULL_REGISTERED,
-        fakeFirstName,fakeLastName,fakeEmailAddress,
-}
- from "../support/constant.js";
+import {fakeFirstName,fakeLastName,fakeEmailAddress,
+        CREATE_ACCOUNT_HEADER_TEXT,
+        ACCOUNT_URL_TEXT,
+        EDIT_ACCOUNT_HEADER_TEXT,
+}from "../support/constant.js";
 
 import { beforeEach } from "mocha";
 
@@ -40,18 +39,28 @@ describe('Creating Account Positive Tests', () => {
     cy.contains('Welcome,' + " " + fakeFirstName + " " + fakeLastName + '!').and('be.visible')
   });
 
-  it.skip('1.Edit Created Account', () => {
+  it('2.Edit firstName and LastName on Created Account', () => {
     //Click create account button
     cy.click_CreateAccountBtn()
     // Populating all fields for registration
     accountBase.fillRegistationForm()
-    // Check the welcome message for registered user
-     // to doo....
+    // Check box content for customer name and email
+    locators.ele_AccountPage.box_Content()
+    .should('have.text',"\n"+fakeFirstName +" "+ fakeLastName+"\n"+fakeEmailAddress+"\n")
+    .and('be.visible')
     // ==============================================================
-
+    // Click edit button link
+    locators.ele_AccountPage.editButton().click()
+    // Check the header section
+    locators.ele_AccountPage.editAccountHeaderText()
+      .should('have.text',EDIT_ACCOUNT_HEADER_TEXT)
+      .and('be.visible')
+    // Update the customer name info
+    cy.edit_FullNameAndSave()
+    // Check box content after update customer name and email, the email is the same
+    locators.ele_AccountPage.box_Content()
+    .should('have.text',"\n" + "new1" +" "+ "new2" + "\n"+fakeEmailAddress+"\n")
+    .and('be.visible')
   });
-
-
-
 
 })

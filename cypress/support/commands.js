@@ -2,7 +2,7 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
-import { MESSAGE_SUCCESSFULL_REGISTERED } from "../support/constant.js";
+import { fakeFirstName, fakeLastName, MESSAGE_SUCCESSFULL_REGISTERED } from "../support/constant.js";
 
 import { Locators } from "../support/locators.js";
 const locators = new (Locators);
@@ -42,7 +42,7 @@ const locators = new (Locators);
 /**
  * SignIn page behavior
 */
-    Cypress.Commands.add('fill_SignInF', () => {
+    Cypress.Commands.add('fill_SignInForm', () => {
         cy.typeEmailAndPassword()
         cy.click_SubmitBtn()
     })
@@ -68,6 +68,14 @@ const locators = new (Locators);
         locators.ele_AccountPage.box_Title()
             .should('have.text','Contact Information').and('be.visible')
     })
+    Cypress.Commands.add('edit_FullNameAndSave',()=>{
+        // Change firstname and lastname 
+        locators.ele_AccountPage.firstNameField().clear().type("new1")
+        locators.ele_AccountPage.lastNameField().clear().type("new2")
+        // Click 'Save' button 
+        locators.ele_AccountPage.saveButton().click()
+    })
+
 
 
 

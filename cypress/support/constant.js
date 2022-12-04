@@ -29,5 +29,6 @@ export let fakePassword = faker.datatype.string(10);
  */
  export let ACCOUNT_URL_TEXT = 'https://magento.softwaretestingboard.com/customer/account/create/';
  export let CREATE_ACCOUNT_HEADER_TEXT = 'Create New Customer Account';
+ export let EDIT_ACCOUNT_HEADER_TEXT = 'Edit Account Information';
  export let MESSAGE_SUCCESSFULL_REGISTERED = 'Thank you for registering with Fake Online Clothing Store.';
  

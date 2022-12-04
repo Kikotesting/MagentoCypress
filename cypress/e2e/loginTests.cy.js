@@ -9,7 +9,6 @@ import {SIGN_OUT_HEADER_TEXT,
 
 import { beforeEach } from "mocha";
 import { Locators } from "../support/locators.js";
-import { should } from "chai";
 const locators = new (Locators);
 
 describe('Login/Logout Positive Tests', () => {
@@ -39,10 +38,9 @@ describe('Login/Logout Positive Tests', () => {
         // Check the header in the box section
         locators.ele_AccountPage.box_Title()
           .should('have.text','Contact Information').and('be.visible')
+        // Check box content for customer name and email
         locators.ele_AccountPage.box_Content()
-          .should('have.text','Bebo Bebov').and('be.visible')
-        locators.ele_AccountPage.box_Content()
-        .should('have.text','bebo@mail.bg').and('be.visible')
+          .should('have.text',"\n"+'Bebo'+" "+'Bebov'+"\n"+'bebo@mail.bg'+"\n")
     })
     it('2.Login with valid Email and Pass then Logout', () => {
       //Click SignIn account button

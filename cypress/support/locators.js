@@ -29,7 +29,14 @@ export class Locators {
     }
     ele_AccountPage = {
         headerAccountText : () => cy.get('.base'),
-        //Box sections
+        editAccountHeaderText : () => cy.get('[data-ui-id="page-title-wrapper"]'),
+        //Fields
+        firstNameField : () => cy.get('#firstname'),
+        lastNameField : () => cy.get('#lastname'),
+        //Buttons
+        editButton : () => cy.get('.box-information > .box-actions > .edit > span'),
+        saveButton : () => cy.get('#form-validate > .actions-toolbar > div.primary > .action > span'),
+        //Box content sections
         box_Title : () => cy.xpath('//*[@class="box-title"]/span[contains(text(),"Contact Information")]'),
         box_Content : () => cy.xpath('//*[@id="maincontent"]/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/p'),
     }
