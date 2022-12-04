@@ -1,16 +1,20 @@
 /// <reference types="cypress" />
 
-import {CREATE_ACCOUNT_HEADER_TEXT, 
-      MESSAGE_SUCCESSFULL_REGISTERED,
-      fakeFirstName,fakeLastName,fakeEmailAddress,
-}
- from "../support/constant.js";
+import {fakeFirstName,fakeLastName,fakeEmailAddress,
+        CREATE_ACCOUNT_HEADER_TEXT,
+        ACCOUNT_URL_TEXT,
+        EDIT_ACCOUNT_HEADER_TEXT,
+        MESSAGE_SAVED_ACCOUNT_INFORMATION,
+}from "../support/constant.js";
 
 import { beforeEach } from "mocha";
-import { AccountBase } from "../pages/accountBase.js";
 
-describe('Creating account tests', () => {
-  const accountBase = new (AccountBase);
+import { AccountBase } from "../utilities/accountBase.js";
+const accountBase = new (AccountBase);
+import { Locators } from "../support/locators.js";
+const locators = new (Locators);
+
+describe('Account Positive Tests', () => {
   
   beforeEach(() => {
     //Open the website under testing
@@ -18,28 +22,88 @@ describe('Creating account tests', () => {
   })
 
   it('1.Create New Account', () => {
-
     //Click create account button
-    cy.clickCreateAccountBtn()
+    cy.click_CreateAccountBtn()
     // Check the URL of the Account page
-    cy.url().should('include', 'https://magento.softwaretestingboard.com/customer/account/create/')
+    cy.url().should('include', ACCOUNT_URL_TEXT)
     // Check the Header of the Account page
     cy.contains(CREATE_ACCOUNT_HEADER_TEXT).and('be.visible')
-
     // Populating all fields for registration
     accountBase.fillRegistationForm()
-    
-    // Check the welcome message for registered user
-    cy.contains(MESSAGE_SUCCESSFULL_REGISTERED).should('have.text',MESSAGE_SUCCESSFULL_REGISTERED)
-    .and('be.visible')
-    // Check the Information for the login user
-    cy.get('.base').should('have.text','My Account').and('be.visible')
+    // Check welcome messages and box section headers
+    cy.validate_SuccessMessageAndBoxSection()
+    // Check box content for customer name and email
+    locators.ele_AccountPage.box_Content()
+        .should('have.text',"\n"+fakeFirstName +" "+ fakeLastName+"\n"+fakeEmailAddress+"\n")
+        .and('be.visible')
+    // Check the Information for the created user on panel header
     cy.contains('Welcome,' + " " + fakeFirstName + " " + fakeLastName + '!').and('be.visible')
-    // Check the My Account section for new registration Name and Address
-    cy.xpath('//*[@id="maincontent"]/div[2]/div[1]/div[3]/div[2]/div[1]/strong/span').should('have.text','Contact Information').and('be.visible')
-    cy.contains(fakeFirstName + " " + fakeLastName).and('be.visible')
-    cy.contains(fakeEmailAddress).and('be.visible')
-
   });
 
-})
+  it('2.Edit "FirstName and LastName" on New Created Account', () => {
+    //Click create account button
+    cy.click_CreateAccountBtn()
+    // Populating all fields for registration
+    accountBase.fillRegistationForm()
+    // Check box content for customer name and email
+    locators.ele_AccountPage.box_Content()
+    .should('have.text',"\n"+fakeFirstName +" "+ fakeLastName+"\n"+fakeEmailAddress+"\n")
+    .and('be.visible')
+    // ==============================================================
+    // Click edit button link
+    locators.ele_AccountPage.editButton().click()
+    // Check the header section
+    locators.ele_AccountPage.editAccountHeaderText()
+      .should('have.text',EDIT_ACCOUNT_HEADER_TEXT)
+      .and('be.visible')
+    // Update the customer name info
+    cy.edit_FullNameAndSave()
+    // Check box content after update customer name and email, the email is the same
+    locators.ele_AccountPage.box_Content()
+    .should('have.text',"\n" + "new1" +" "+ "new2" + "\n"+fakeEmailAddress+"\n")
+    .and('be.visible')
+    // Check the Information for the edited user on panel header
+    cy.contains('Welcome,' + " " + 'new1' + " " + 'new2' + '!').and('be.visible')
+  });
+
+  it('3.Edit "Email" on Created Account', () => {
+    //Login with defaultUser for editing
+    cy.login_Default()
+    cy.click_CustomerMenu_MyAccount()
+    // Check box content for customer name and email
+    locators.ele_AccountPage.box_Content()
+      .should('have.text',"\n"+'kikcho'+" "+'kikchov'+"\n"+'kiko1@mail.bg'+"\n")
+    // ==============================================================
+    // Click edit button link
+    locators.ele_AccountPage.editButton().click()
+    // Check the header section
+    locators.ele_AccountPage.editAccountHeaderText()
+      .should('have.text',EDIT_ACCOUNT_HEADER_TEXT)
+      .and('be.visible')
+    // Update the customer name info (param = kikoTesting@mail.bg)
+    cy.edit_EmailAndSave()
+    //Check the saving information text
+    locators.ele_AccountPage.messageSavingAccountInfo()
+      .should('have.text',MESSAGE_SAVED_ACCOUNT_INFORMATION)
+      .and('be.visible')
+    /**
+     * The test end here, but I prefer to revert the old data for saving purpose
+     * =========================================================================
+     */
+    cy.clearCookies()
+    cy.reload()
+    cy.click_SignInBtn()
+    cy.typeEdited_EmailAndPassword()
+    cy.click_SubmitBtn()
+    cy.click_CustomerMenu_MyAccount()
+    locators.ele_AccountPage.box_Content()
+      .should('have.text',"\n" + "kikcho" +" "+ "kikchov" + "\n"+'kikoTesting@mail.bg'+"\n")
+      .and('be.visible')
+    locators.ele_AccountPage.editButton().click()
+    cy.revert_OldEmailAndSave()
+    locators.ele_AccountPage.messageSavingAccountInfo()
+      .should('have.text',MESSAGE_SAVED_ACCOUNT_INFORMATION)
+      .and('be.visible')
+  });
+
+});

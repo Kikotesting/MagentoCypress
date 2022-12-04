@@ -15,7 +15,7 @@ export class AccountBase {
         accPasswordConfirm : () => cy.get('#password-confirmation'),
         createAccButton : () => cy.xpath('//button/span[contains(text(),"Create an Account")]'),
     }
-        /**
+    /**
      * METHODS fill the registration form
      */
         type_firstName(){

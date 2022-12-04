@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-	  "cypress": "cypress open"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
