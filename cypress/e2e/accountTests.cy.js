@@ -40,7 +40,7 @@ describe('Account Positive Tests', () => {
     cy.contains('Welcome,' + " " + fakeFirstName + " " + fakeLastName + '!').and('be.visible')
   });
 
-  it('2.Edit "firstName and LastName" on New Created Account', () => {
+  it('2.Edit "FirstName and LastName" on New Created Account', () => {
     //Click create account button
     cy.click_CreateAccountBtn()
     // Populating all fields for registration
