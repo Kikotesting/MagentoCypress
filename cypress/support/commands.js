@@ -1,47 +1,52 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-/**
- * General commands
- * HeaderMenuDropdown (3-options)
-*/
-Cypress.Commands.add('click_CustomerMenu',()=>{
-    cy.wait(3000)
-    cy.xpath('//div[2]/header/div[1]/div/ul/li[2]/span/button').click()
-})
-Cypress.Commands.add('click_CustomerMenu_MyAccount',()=>{
-    cy.wait(1000)
-    cy.contains('My Account').click()
-})
-Cypress.Commands.add('click_CustomerMenu_MyWishList',()=>{
-    cy.wait(1000)
-    cy.contains('My Wish List').click()
-})
-Cypress.Commands.add('click_CustomerMenu_SignOut',()=>{
-    cy.wait(1000)
-    cy.contains('Sign Out').click()
-})
 
-/**
- * Home page commands
-*/
-Cypress.Commands.add('clickSignInBtn', () => {
-    cy.contains('li', 'Sign In').click()
-  })
-Cypress.Commands.add('clickCreateAccountBtn', () => {
-    cy.contains('li', 'Create an Account').click()
-})
+import { Locators } from "../support/locators.js";
+const locators = new (Locators);
+
+/*************************************************
+ * GENERAL website commands
+************************************************/
+    Cypress.Commands.add('click_SignInBtn', () => {
+        locators.ele_General.signInBtn().click()
+    })
+    Cypress.Commands.add('click_CreateAccountBtn', () => {
+        locators.ele_General.createAccBtn().click()
+    })
+    Cypress.Commands.add('click_CustomerMenu_MyAccount',()=>{
+        cy.wait(3000)
+        locators.ele_General.dropdown_CustomerMenu().click()
+        cy.wait(1000)
+        cy.contains('My Account').click()
+    })
+    Cypress.Commands.add('click_CustomerMenu_MyWishList',()=>{
+        cy.wait(3000)
+        locators.ele_General.dropdown_CustomerMenu().click()
+        cy.wait(1000)
+        cy.contains('My Wish List').click()
+    })
+    Cypress.Commands.add('click_SignOut',()=>{
+        cy.wait(3000)
+        locators.ele_General.dropdown_CustomerMenu.click()
+        cy.wait(1000)
+        cy.contains('Sign Out').click()
+    })
 
 /**
  * SignIn page commands
 */
-Cypress.Commands.add('typeEmailAndPassword', () => {
-    cy.get('#email').type('bebo@mail.bg')
-    cy.get('#pass').type('Kiko123@')
-})
-Cypress.Commands.add('clickSubmitBtn',()=>{
-    cy.get('#send2').click()
-})
+    Cypress.Commands.add('signIn_validCredentials', () => {
+        cy.typeEmailAndPassword()
+        cy.clickSubmitBtn()
+    })
+    Cypress.Commands.add('typeEmailAndPassword', () => {
+        locators.ele_SignInPage.emailField().type('bebo@mail.bg')
+        locators.ele_SignInPage.passwordField().type('Kiko123@')
+    })
+    Cypress.Commands.add('clickSubmitBtn',()=>{
+        locators.ele_SignInPage.submitButton().click()
+    })
 
 
 
