@@ -18,7 +18,7 @@ describe('Login/Logout Positive Tests', () => {
       cy.visit('https://magento.softwaretestingboard.com')
     })
   
-    it('1.Login with valid Email and Pass', () => {
+    it.skip('1.Login with valid Email and Pass', () => {
         //Click SignIn account button
         cy.click_SignInBtn()
         // Check the URL of the SignIn page
@@ -26,7 +26,7 @@ describe('Login/Logout Positive Tests', () => {
         // Check the Header of the SignIn page
         cy.contains('Customer Login').and('be.visible')
         // Populates the SignIn form and submit
-        cy.fill_SignInForm()
+        cy.fill_SignInFormAndSubmit()
         // Check header panel
         cy.contains('Welcome, kikcho kikchov!').and('be.visible')
         // Go to Dropdown-header Menu and choose option My Account
@@ -50,7 +50,7 @@ describe('Login/Logout Positive Tests', () => {
       // Check the Header of the SignIn page
       cy.contains('Customer Login').and('be.visible')
       // Populates the SignIn form and submit
-      cy.fill_SignInForm()
+      cy.fill_SignInFormAndSubmit()
       // Navigate to dropdownCustomer menu and click SignOut
       cy.click_SignOut()
       //Check the url for Sign Out
