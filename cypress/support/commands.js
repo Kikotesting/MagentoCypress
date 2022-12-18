@@ -29,8 +29,9 @@ const locators = new (Locators);
         cy.contains('My Wish List',{ timeout: 1000 }).click()
     })
     Cypress.Commands.add('click_SignOut',()=>{
-        locators.ele_General.dropdown_CustomerMenu({ timeout: 3000 }).click()
-        cy.contains('Sign Out',{ timeout: 1000 }).click()
+        cy.wait(3000)
+        locators.ele_General.dropdown_CustomerMenu().click()
+        cy.contains('Sign Out',{ timeout: 2000 }).click()
     })
 
 /**

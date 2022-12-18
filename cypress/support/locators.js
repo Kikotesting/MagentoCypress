@@ -16,7 +16,7 @@ export class Locators {
         newsLetterField : () => cy.get('#newsletter'),
 
         // Buttons
-        signInBtn : () => cy.xpath('/html/body/div[2]/header/div[1]/div/ul/li[2]/a'),
+        signInBtn : () => cy.get('html body.cms-home.cms-index-index.page-layout-1column div.page-wrapper header.page-header div.panel.wrapper div.panel.header ul.header.links li.authorization-link'),
         createAccBtn : () => cy.xpath('/html/body/div[2]/header/div[1]/div/ul/li[3]/a'),
         showCartIconBtn : () => cy.get('.showcart'),
         footer_SubscribeBtn : () => cy.xpath('//button/span[contains(text(),"Subscribe")]'),
